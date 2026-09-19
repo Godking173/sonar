@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+# sonar-bootstrap — what a fresh session runs first. No memory required, none used.
+cd "$(dirname "$0")" || exit 2
+exec node sonar-bootstrap.js "$@"

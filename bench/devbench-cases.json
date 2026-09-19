@@ -1,0 +1,79 @@
+{
+ "_rule": "NON-SEALED known-answer set for the SWEEP ENGINE (server.py::sonar_sweep). Use it to tune. The 20 sealed control-plane cases (C01-C20) are NOT here and must stay sealed for phase 6. Add a case the moment a live sweep buries an answer you then found in top_by_angle.",
+ "cases": [
+  {
+   "id": "metro2",
+   "problem": "metro 2 credit reporting file format parser",
+   "limit": 8,
+   "expect_any": [
+    "moov-io/metro2"
+   ],
+   "evidence": "2026-09-06 live: keyword #1 + topic:metro2 #1, absent from shown 8 (firefly-iii 24k\u2605 via topic:credit-card won)"
+  },
+  {
+   "id": "prf",
+   "problem": "pseudo relevance feedback query drift",
+   "limit": 6,
+   "expect_any": [
+    "ucasir/NPRF"
+   ],
+   "evidence": "2026-09-06 live: keyword #1 + phrase #1 at 31\u2605, hidden under the 50\u2605 floor; shown 6 were hash functions/pseudocode"
+  },
+  {
+   "id": "semantic-code-search",
+   "problem": "semantic code search engine",
+   "limit": 8,
+   "expect_any": [
+    "kantord/SeaGOAT",
+    "probelabs/probe",
+    "oraios/serena"
+   ],
+   "evidence": "2026-09-06 live: SeaGOAT phrase #1, probe phrase #2; shown page had ultralytics via topic:semantic-segmentation"
+  },
+  {
+   "id": "browser-automation",
+   "problem": "browser automation testing",
+   "limit": 8,
+   "expect_any": [
+    "browser-use/browser-use",
+    "microsoft/playwright",
+    "puppeteer/puppeteer"
+   ],
+   "evidence": "2026-08-01 doctrine case: keyword shape alone returned found:0; browser-use sits one topic call away"
+  },
+  {
+   "id": "semantic-code-search-hard",
+   "problem": "semantic code search engine",
+   "limit": 8,
+   "expect_any": [
+    "kantord/SeaGOAT"
+   ],
+   "tier": "hard",
+   "evidence": "2026-09-07: SeaGOAT (1,303 stars) is rank 1 of the PHRASE angle and a literal semantic-code-search tool, yet it is off the 8-slot page while Semantic-Org/Semantic-UI (51,017 stars, a CSS framework) sits high in topic. Added per devbench-cases._rule: a live sweep buried an answer that was sitting in top_by_angle. Discriminates relevance-vs-size (criterion C)."
+  },
+  {
+   "id": "metro2-hard",
+   "problem": "metro 2 credit reporting file format parser",
+   "limit": 8,
+   "expect_any": [
+    "pingleware/metro2-node",
+    "DemboNauta/metro2-file-viewer"
+   ],
+   "tier": "withdrawn",
+   "evidence": "2026-09-07: two genuine Metro 2 implementations (1 star and 0 stars) are rank 1 and rank 2 of the README angle and are buried by the star floor. Tests sub-floor exact-match promotion \u2014 'a 0-star repo can be the answer' is doctrine.",
+   "withdrawn_2026_09_07": "WITHDRAWN THE SAME DAY IT WAS MINTED, by the data. I assumed the sub-floor exact-match reserve was promoting junk. It is not. On metro2 it promoted Marion310/metro2-credit-repair, andrew-goad/metro2-remediation-sandbox and leonardrougeau-ctrl/credit-dispute-cli \u2014 all 1 star, all genuine Metro 2 / credit-dispute repos. On prf it promoted ucasir/NPRF (the ORIGINAL known answer), mirkomantovani/web-search-engine-UIC and mohit155/SearchEngine \u2014 all genuinely PRF-related. The reserve is working; my 'buried answer' merely lost a 3-slot competition to equally valid peers. A case that asserts 'the page must contain THIS repo' when the page already holds correct answers is arbitrary, not hard. Kept in the file, marked withdrawn, NOT deleted \u2014 the mistake is part of the record."
+  },
+  {
+   "id": "prf-hard",
+   "problem": "pseudo relevance feedback query drift",
+   "limit": 6,
+   "expect_any": [
+    "valinsogna/IR_BIM_model"
+   ],
+   "tier": "withdrawn",
+   "evidence": "2026-09-07: an IR model implementing PRF, rank 1 of code:pseudo_relevance_feedback at 1 star, buried by the floor. Tests whether the identifier code angle's find can reach the page.",
+   "withdrawn_2026_09_07": "WITHDRAWN THE SAME DAY IT WAS MINTED, by the data. I assumed the sub-floor exact-match reserve was promoting junk. It is not. On metro2 it promoted Marion310/metro2-credit-repair, andrew-goad/metro2-remediation-sandbox and leonardrougeau-ctrl/credit-dispute-cli \u2014 all 1 star, all genuine Metro 2 / credit-dispute repos. On prf it promoted ucasir/NPRF (the ORIGINAL known answer), mirkomantovani/web-search-engine-UIC and mohit155/SearchEngine \u2014 all genuinely PRF-related. The reserve is working; my 'buried answer' merely lost a 3-slot competition to equally valid peers. A case that asserts 'the page must contain THIS repo' when the page already holds correct answers is arbitrary, not hard. Kept in the file, marked withdrawn, NOT deleted \u2014 the mistake is part of the record."
+  }
+ ],
+ "_tiers": "cases without a 'tier' key are the CORE set (the historical 4). tier:'hard' cases were minted 2026-09-07 from answers found in top_by_angle but buried off the page. Report core and hard recall SEPARATELY \u2014 do not silently redefine the core number."
+}

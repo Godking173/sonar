@@ -1,0 +1,79 @@
+{
+  "_rule": "MACHINE-DELIVERED PHASE STATE. sonar-bootstrap prints this FIRST so a fresh session is TOLD the next task instead of being expected to remember it. This file is authored by the operator+Claude at each phase boundary; everything else in the manifest is derived. It is small, dated, and version-controlled on purpose.",
+  "updated_at": "2026-09-19",
+  "updated_at_commit": "0713a67",
+  "current_phase": "DISCOVERY EXCELLENCE (phase 4) — in progress, measured",
+  "current_phase_status": "IN PROGRESS since 2026-09-06 (recorded 2026-09-19 by D-015 — the code moved first, the record caught up). The sweep engine is sweep-v3.44; the known-answer devbench is the acceptance test (5/5 first-page · 5/5 any-angle). Phases 1-3 (impossible to forget · impossible to lie · independent adjudication) are DONE and stay frozen. Public release is decided (D-014); the public tree is produced only by fw-export-public.sh.",
+  "phase_order": [
+    "1. Make Sonar impossible to forget  — DONE (brain manifest, bootstrap, fresh-session test)",
+    "2. Make Sonar impossible to lie     — DONE (trust ladder, provenance, 52 attacks, execution boundary, S24 persistence)",
+    "3. Make adjudication independent    — DONE (S25: blind synthesis, frozen contrarian input, independent adjudication, attacks A43-A52)",
+    "4. Make Sonar excellent at discovery — IN PROGRESS since 2026-09-06 (D-015): devbench-gated engine changes, sweep-v3.44",
+    "5. Make Sonar excellent at understanding",
+    "6. Falsification + synthesis, then blind benchmark of the whole thing"
+  ],
+  "next_task": {
+    "objective": "PHASE 4 IN PROGRESS. Keep every discovery change devbench-gated and version-bumped. The three public-user defects (SKIP != FAIL, env-overridable corpora, stop-pair topic seeds) ship in sweep-v3.44. Open: the merged-list ranking still buries multi-angle agreement hits below star-sorted rows (docs/HONEST-LIMITS.md); measure before changing. STANDING RULES carried from phase 3 (S25), still enforced every run: the flow is EVIDENCE → SYNTHESIS → CONTRARIAN → ADJUDICATION → VERDICT → VERIFICATION; every synthesis claim resolves SUPPORTED / PARTIALLY_SUPPORTED / UNSUPPORTED / CONTRADICTED / UNDECIDABLE against a frozen evidence snapshot; declared role identity never proves underlying model weights — that limitation stays UNKNOWN and is recorded, never claimed away.",
+    "acceptance_test": "python3 cc-sonar-devbench.py",
+    "hard_rules": [
+      "The SYNTHESIZER may never adjudicate its own conclusion.",
+      "No confidence score may substitute for evidence — the field is refused outright.",
+      "A claim with no evidence-node provenance MUST be rejected.",
+      "A contradiction between evidence and claim MUST automatically block promotion until resolved.",
+      "The ADJUDICATOR must be independently versioned from the SYNTHESIZER: model identity, model version, prompt/config hash, timestamp, evidence snapshot hash.",
+      "Role separation must be enforced through machine-readable artefacts and promotion rules — never a written rule as the primary defence.",
+      "Two different prompts do NOT constitute independence, and two API calls never prove different underlying model weights: the independence ladder is DECLARED_IDENTITY → OBSERVED_EXECUTION → VERIFIED_CONFIGURATION → UNKNOWN_UNDERLYING_WEIGHTS, and a record claiming more than it can prove is refused as an overclaim."
+    ]
+  },
+  "known_blockers_found_by_inspection": [
+    {
+      "id": "B1",
+      "finding": "The declared pipeline ORDER was COMPARISON → CONTRARIAN → SYNTHESIS, so the synthesizer received the contrarian's objections BEFORE producing its conclusion. Attack A51 was the default.",
+      "resolution": "RESOLVED — ORDER is now …COMPARISON → SYNTHESIS → CONTRARIAN → ADJUDICATION → VERDICT → VERIFICATION; SYNTHESIS's contract forbids contrarian.jsonl as an input; adjud.synthesis_blind proves absence from the synthesis snapshot's files_present.",
+      "consequence": "RESOLVED — do not reintroduce COMPARISON → CONTRARIAN → SYNTHESIS ordering; adjud.synthesis_blind will refuse it (A51).",
+      "verify": "node sonar-pipeline.js --contracts ; grep -n 'const ORDER' sonar-pipeline.js"
+    },
+    {
+      "id": "B2",
+      "finding": "In the synthetic control case the CLAIM node was created INSIDE the CONTRARIAN stage — the stage meant to attack the claim was the stage that materialised it. No record existed of who authored what.",
+      "resolution": "RESOLVED — every CLAIM is authored by the SYNTHESIZER and every COUNTERCLAIM by the CONTRARIAN, recorded in the node's author field and enforced by adjud.node_authorship.",
+      "consequence": "RESOLVED — do not let CONTRARIAN materialise a CLAIM node, or SYNTHESIZER a COUNTERCLAIM; adjud.node_authorship will refuse it.",
+      "verify": "grep -n 'author: \"SYNTHESIZER\"' sonar-e2e.js"
+    },
+    {
+      "id": "B3",
+      "finding": "Model identity was unrepresentable — no model name, version, prompt hash or config hash anywhere in the system.",
+      "resolution": "RESOLVED — declareRole() records {role, model, model_version, prompt_sha256, config_sha256} as a chained ROLE_DECLARED event (inside the run seal via events_head) and in the manifest; the two must agree (adjud.roles_declared).",
+      "consequence": "RESOLVED — do not add a role or stage without declareRole(); adjud.roles_declared will refuse an undeclared or mismatched identity.",
+      "verify": "node sonar-run.js --show <run-id> | grep -i role"
+    },
+    {
+      "id": "B4",
+      "finding": "Claims had no per-claim status — verdict.json carried truth at the VERDICT level only.",
+      "resolution": "RESOLVED — synthesis.json declares claims[] with ids and cites; adjudication.json resolves each id with one of the five values plus supporting/contradicting node references (adjud.claims_resolved, adjud.record_valid).",
+      "consequence": "RESOLVED — do not let a verdict ship without adjudicating every synthesis claim; adjud.claims_resolved will refuse it.",
+      "verify": "node sonar-adjudicate.js --selftest"
+    },
+    {
+      "id": "B5",
+      "finding": "A43 (synthesizer and adjudicator secretly the same model) cannot be fully closed from inside this repo: distinct declared identity and distinct execution records are enforceable; proving two API calls reached different weights is not.",
+      "resolution": "BOUNDED, permanently — the independence ladder ends at UNKNOWN_UNDERLYING_WEIGHTS, the adjudication record must say so, and a record claiming weight independence is refused as an overclaim (validated in sonar-adjudicate.js --selftest).",
+      "consequence": "BOUNDED, not solvable — never write a record claiming proven weight-independence; validateAdjudication() refuses the overclaim by design.",
+      "verify": "node sonar-adjudicate.js --selftest"
+    }
+  ],
+  "hard_constraints_for_this_phase": [
+    "Do NOT run any of the 20 sealed benchmark cases",
+    "Do NOT modify or redistribute the sealed cases or their seals (S10)",
+    "Do NOT change the control plane's trust, provenance, boundary or adjudication rules without a new attack that proves the change (S22)",
+    "Do NOT back-fill historical evidence — D-006 is permanent and irreversible",
+    "Every discovery/relevance/caching change: bump SONAR_SWEEP_VERSION (it is the cache key) and re-run cc-sonar-devbench.py; below 5/5 does not ship",
+    "Do NOT use a written rule as the primary defence — enforcement must be executable",
+    "The public tree comes only from fw-export-public.sh; no hand copies (D-014)"
+  ],
+  "discovery_engine": {
+    "sweep_version_at_update": "sweep-v3.44",
+    "acceptance": "python3 cc-sonar-devbench.py -> 5/5 first-page and 5/5 any-angle on the known-answer set",
+    "rule": "sonar-bootstrap compares this to the engine on disk; a mismatch is announced as STALE, never hidden"
+  }
+}

@@ -1,0 +1,8 @@
+# runtime litter — never product
+sonar/runs/
+sonar/BRAIN.json
+scout/
+bench/results/*.json
+__pycache__/
+*.pyc
+.DS_Store
