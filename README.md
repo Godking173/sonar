@@ -34,3 +34,9 @@ Read `docs/HONEST-LIMITS.md` before trusting a sweep. Measured, not remembered.
 This tree was produced by a deterministic exporter from a private working repo; `MANIFEST.sha256`
 lists every file. The ledgers under `sonar/` and `memory/` start empty on purpose — see
 `docs/LEDGERS.md`.
+
+## License
+
+Licensed under the Apache License, Version 2.0 — see `LICENSE` and `NOTICE`. The License does
+not grant trademark rights: the "Sonar" name and any project branding are not licensed for use
+beyond what the License itself provides.
