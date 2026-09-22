@@ -42,6 +42,11 @@ Licensed under the Apache License, Version 2.0 — see `LICENSE` and `NOTICE`. T
 not grant trademark rights: the "Sonar" name and any project branding are not licensed for use
 beyond what the License itself provides.
 
+## Cite this
+
+`CITATION.cff` is at the repo root — GitHub renders a "Cite this repository" button from it.
+Canonical repository and current release: https://github.com/Godking173/sonar/releases
+
 ---
 
 Part of the same toolkit as [1TimeAi](https://github.com/Godking173/1timeai) — the deterministic
