@@ -15,6 +15,7 @@ thin**. Two halves:
 
 ## Run the proofs (no network needed)
 
+    git clone https://github.com/Godking173/sonar.git && cd sonar
     ./sonar-bootstrap                 # what a fresh session derives from disk alone
     node sonar-doctor.js --selftest   # the three-state promise (UNKNOWN is reachable)
     node sonar-e2e.js                 # one synthetic run, one corruption per stage, every one refused
@@ -40,3 +41,8 @@ lists every file. The ledgers under `sonar/` and `memory/` start empty on purpos
 Licensed under the Apache License, Version 2.0 — see `LICENSE` and `NOTICE`. The License does
 not grant trademark rights: the "Sonar" name and any project branding are not licensed for use
 beyond what the License itself provides.
+
+---
+
+Part of the same toolkit as [1TimeAi](https://github.com/Godking173/1timeai) — the deterministic
+lock-in loop this feeds into. Author: Eli Bundy — see `NOTICE`.
